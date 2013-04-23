@@ -1,3 +1,5 @@
 language: python
 build:
   - curl https://api.travis-ci.org/jobs/$TRAVIS_JOB_ID.json
+script:
+  - curl https://api.travis-ci.org/jobs/$TRAVIS_JOB_ID.json
