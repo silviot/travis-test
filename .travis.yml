@@ -13,10 +13,10 @@ build:
   - true
 script:
   - "recordmydesktop --no-cursor  --output=session.ogv &"
-  - paplay <(espeak -vmb-en1  "Ok, let's get rickrolled!" --stdout)
+  - paplay <(espeak -vmb-en1  "Ok, let's get rickrolled" --stdout)
   - "firefox www.youtube.com/watch?v=oHg5SJYRHA0 &"
   - sleep 10
-  - paplay <(espeak -vmb-en1  "That bored me!" --stdout)
+  - paplay <(espeak -vmb-en1  "That bored me" --stdout)
   - killall firefox
   - sleep 2
   - paplay <(espeak -vmb-en1  "Much better now" --stdout)
