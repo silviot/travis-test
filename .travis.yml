@@ -1,7 +1,7 @@
 language: python
 before_install:
  - sudo apt-get update -qq
- - sudo apt-get install -qq recordmydesktop xeyes
+ - sudo apt-get install -qq recordmydesktop x11-apps
 before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
