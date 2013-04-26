@@ -8,7 +8,7 @@ before_script:
 build:
   - true
 script:
-  - "recordmydesktop  --no-sound --output=out.ogv &"
+  - "recordmydesktop --no-cursor  --no-sound --output=out.ogv &"
   - "xeyes & sleep 4 ; kill %1"
   - killall recordmydesktop; fg
   - tar cf out.ogv artifacts.tar
