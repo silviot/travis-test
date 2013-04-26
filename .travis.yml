@@ -1,8 +1,6 @@
 language: python
 env:
- - DURATION=5
- - DURATION=8
- - DURATION=30
+ - DURATION=100
 before_install:
  - sudo apt-get update -qq
  - sudo apt-get install -qq recordmydesktop x11-apps libpulse-dev pulseaudio dbus-x11
@@ -13,16 +11,11 @@ before_script:
 build:
   - true
 script:
-  - recordmydesktop  --print-config
-  - "recordmydesktop --no-cursor  --output=out.ogv &"
-  - sleep 3
-  - "xeyes &"
+  - "recordmydesktop --no-cursor  --output=session.ogv &"
   - "firefox www.youtube.com/watch?v=oHg5SJYRHA0 &"
   - sleep $DURATION
-  - killall xeyes
-  - sleep 2
   - killall firefox
   - killall recordmydesktop
-  - while pgrep -x recordmydesktop ; do sleep 1; done
-  - tar cf artifacts.tar out.ogv
+  - while pgrep -x recordmydesktop > /dev/null ; do sleep 1; done # wait for transcoding
+  - tar cf artifacts.tar session.ogv
   - curl http://collective_artifacts.rr.nu/submit_artifacts   --form archive=@artifacts.tar --form TRAVIS_BUILD_ID=$TRAVIS_BUILD_ID --form TRAVIS_JOB_ID=$TRAVIS_JOB_ID
