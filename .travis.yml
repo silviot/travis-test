@@ -5,7 +5,7 @@ env:
  - DURATION=30
 before_install:
  - sudo apt-get update -qq
- - sudo apt-get install -qq recordmydesktop x11-apps libpulse-dev pulseaudio
+ - sudo apt-get install -qq recordmydesktop x11-apps libpulse-dev pulseaudio dbus-x11
 before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
