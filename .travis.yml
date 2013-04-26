@@ -1,9 +1,10 @@
 language: python
 env:
- - ONE=one
- - TWO=two
- - THREE=three.1
- - THREE=three.2
+ matrix:
+   - ONE=one
+   - TWO=two
+   - THREE=three.1
+   - THREE=three.2
 before_install:
  - sudo apt-get update -qq
  - sudo apt-get install -qq recordmydesktop x11-apps libpulse-dev pulseaudio dbus-x11
