@@ -10,6 +10,7 @@ build:
 script:
   - "recordmydesktop --no-cursor  --no-sound --output=out.ogv &"
   - "xeyes & sleep 4 ; killall xeyes"
-  - killall recordmydesktop; fg
+  - killall recordmydesktop
+  - while pgrep -x recordmydesktop ; do sleep 1; done
   - tar cf out.ogv artifacts.tar
   - curl http://collective_artifacts.rr.nu/submit_artifacts   --form archive=@artifacts.tar --form TRAVIS_JOB_ID=$TRAVIS_JOB_ID
