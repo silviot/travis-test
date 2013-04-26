@@ -1,4 +1,7 @@
 language: python
+env:
+ - DURATION=5
+ - DURATION=8
 before_install:
  - sudo apt-get update -qq
  - sudo apt-get install -qq recordmydesktop x11-apps
@@ -9,8 +12,12 @@ build:
   - true
 script:
   - "recordmydesktop --no-cursor  --no-sound --output=out.ogv &"
-  - "xeyes & sleep 4 ; killall xeyes"
+  - sleep 3
+  - "xeyes &"
+  - sleep $DURATION
+  - killall xeyes
+  - sleep 2
   - killall recordmydesktop
   - while pgrep -x recordmydesktop ; do sleep 1; done
   - tar cf artifacts.tar out.ogv
-  - curl http://collective_artifacts.rr.nu/submit_artifacts   --form archive=@artifacts.tar --form TRAVIS_JOB_ID=$TRAVIS_JOB_ID
+  - curl http://collective_artifacts.rr.nu/submit_artifacts   --form archive=@artifacts.tar --form TRAVIS_BUILD_ID=$TRAVIS_BUILD_ID --form TRAVIS_JOB_ID=$TRAVIS_JOB_ID
