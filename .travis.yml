@@ -1,4 +1,9 @@
 language: python
+env:
+ - ONE=one
+ - TWO=two
+ - THREE=three.1
+ - THREE=three.2
 before_install:
  - sudo apt-get update -qq
  - sudo apt-get install -qq recordmydesktop x11-apps libpulse-dev pulseaudio dbus-x11
@@ -11,7 +16,7 @@ build:
 script:
   - "recordmydesktop --no-cursor  --output=session.ogv &"
   - "firefox www.youtube.com/watch?v=oHg5SJYRHA0 &"
-  - sleep 15
+  - sleep 10
   - killall firefox
   - killall recordmydesktop
   - while pgrep -x recordmydesktop > /dev/null ; do sleep 1; done # wait for transcoding
