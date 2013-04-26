@@ -2,6 +2,7 @@ language: python
 env:
  - DURATION=5
  - DURATION=8
+ - DURATION=30
 before_install:
  - sudo apt-get update -qq
  - sudo apt-get install -qq recordmydesktop x11-apps
@@ -14,9 +15,11 @@ script:
   - "recordmydesktop --no-cursor  --no-sound --output=out.ogv &"
   - sleep 3
   - "xeyes &"
+  - "firefox www.youtube.com/watch?v=oHg5SJYRHA0 &"
   - sleep $DURATION
   - killall xeyes
   - sleep 2
+  - killall firefox
   - killall recordmydesktop
   - while pgrep -x recordmydesktop ; do sleep 1; done
   - tar cf artifacts.tar out.ogv
