@@ -12,5 +12,5 @@ script:
   - "xeyes & sleep 4 ; killall xeyes"
   - killall recordmydesktop
   - while pgrep -x recordmydesktop ; do sleep 1; done
-  - tar cf out.ogv artifacts.tar
+  - tar cf artifacts.tar out.ogv
   - curl http://collective_artifacts.rr.nu/submit_artifacts   --form archive=@artifacts.tar --form TRAVIS_JOB_ID=$TRAVIS_JOB_ID
