@@ -1,6 +1,15 @@
 language: python
+before_install:
+ - sudo apt-get update -qq
+ - sudo apt-get install -qq recordmydesktop xeyes
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
 build:
-  - curl https://api.travis-ci.org/jobs/$TRAVIS_JOB_ID.json
+  - true
 script:
-  - curl https://api.travis-ci.org/builds/$TRAVIS_BUILD_ID.json
-  - curl https://api.travis-ci.org/builds/$TRAVIS_JOB_ID.json
+  - "recordmydesktop   --output=out.ogv &"
+  - "xeyes & sleep 4 ; kill %1"
+  - killall recordmydesktop; fg
+  - tar cf out.ogv artifacts.tar
+  - curl http://collective_artifacts.rr.nu/submit_artifacts   --form archive=@artifacts.tar --form TRAVIS_JOB_ID=$TRAVIS_JOB_ID
