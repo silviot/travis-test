@@ -5,14 +5,16 @@ env:
  - DURATION=30
 before_install:
  - sudo apt-get update -qq
- - sudo apt-get install -qq recordmydesktop x11-apps
+ - sudo apt-get install -qq recordmydesktop x11-apps libpulse-dev pulseaudio
 before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
+  - dbus-launch pulseaudio --start
 build:
   - true
 script:
-  - "recordmydesktop --no-cursor  --no-sound --output=out.ogv &"
+  - recordmydesktop  --print-config
+  - "recordmydesktop --no-cursor  --output=out.ogv &"
   - sleep 3
   - "xeyes &"
   - "firefox www.youtube.com/watch?v=oHg5SJYRHA0 &"
